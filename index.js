@@ -494,19 +494,41 @@
   }
 
   // Preload the first real tile level (512px) before showing a scene.
-  // Keep the original five-level pyramid intact while reducing visible
-  // low-resolution/tile-square transitions, especially on mobile.
+  // On iOS/WebKit also preload the complete 1024px level (24 tiles).
+  // This keeps the existing pyramid and Android/desktop behaviour intact,
+  // while preventing the destination scene from being exposed before iOS
+  // has the next resolution level available in the browser cache.
+  var isIOSWebKit = /iP(hone|od|ad)/.test(navigator.platform) ||
+    (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+
+  function preloadTile(url) {
+    return new Promise(function(resolve) {
+      var img = new Image();
+      img.onload = resolve;
+      img.onerror = resolve;
+      img.src = url;
+    });
+  }
+
   function preloadFirstLevel(scene) {
     var faces = [ 'f', 'b', 'l', 'r', 'u', 'd' ];
     var id = scene.data.id;
-    var loads = faces.map(function(face) {
-      return new Promise(function(resolve) {
-        var img = new Image();
-        img.onload = resolve;
-        img.onerror = resolve;
-        img.src = 'tiles/' + id + '/1/' + face + '/0/0.jpg';
-      });
+    var loads = [];
+
+    faces.forEach(function(face) {
+      loads.push(preloadTile('tiles/' + id + '/1/' + face + '/0/0.jpg'));
     });
+
+    if (isIOSWebKit) {
+      faces.forEach(function(face) {
+        for (var y = 0; y < 2; y++) {
+          for (var x = 0; x < 2; x++) {
+            loads.push(preloadTile('tiles/' + id + '/2/' + face + '/' + y + '/' + x + '.jpg'));
+          }
+        }
+      });
+    }
+
     return Promise.all(loads);
   }
 

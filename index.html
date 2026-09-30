@@ -3,10 +3,13 @@
 <head>
 <title>Project Title</title>
 <meta charset="utf-8">
+<meta name="color-scheme" content="light">
 <meta name="viewport" content="target-densitydpi=device-dpi, width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui" />
 <style> @-ms-viewport { width: device-width; } </style>
 <link rel="stylesheet" href="vendor/reset.min.css">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?v=1.8.4C-info-phone-scale">
+<link rel="stylesheet" href="vendor/demo-hotspot-styles/css/tooltip-casa.css?v=1.8.4C-info-phone-scale">
+<link rel="stylesheet" href="vendor/textInfo.css">
 </head>
 <body class="multiple-scenes ">
 
@@ -16,62 +19,85 @@
   <ul class="scenes">
     
       <a href="javascript:void(0)" class="scene" data-id="0-ingresso">
-        <li class="text">Ingresso</li>
+        <img class="sceneThumb" src="img/scene-thumbs/0-ingresso.jpg" alt="Ingresso">
+        <span class="text">Ingresso</span>
       </a>
     
       <a href="javascript:void(0)" class="scene" data-id="1-studio">
-        <li class="text">Studio</li>
+        <img class="sceneThumb" src="img/scene-thumbs/1-studio.jpg" alt="Studio">
+        <span class="text">Studio</span>
       </a>
     
       <a href="javascript:void(0)" class="scene" data-id="2-studio">
-        <li class="text">Studio</li>
+        <img class="sceneThumb" src="img/scene-thumbs/2-studio.jpg" alt="Studio">
+        <span class="text">Studio</span>
       </a>
     
       <a href="javascript:void(0)" class="scene" data-id="3-studio">
-        <li class="text">Studio</li>
+        <img class="sceneThumb" src="img/scene-thumbs/3-studio.jpg" alt="Studio">
+        <span class="text">Studio</span>
       </a>
     
       <a href="javascript:void(0)" class="scene" data-id="4-camera-da-letto">
-        <li class="text">Camera da letto</li>
+        <img class="sceneThumb" src="img/scene-thumbs/4-camera-da-letto.jpg" alt="Camera da letto">
+        <span class="text">Camera da letto</span>
       </a>
     
       <a href="javascript:void(0)" class="scene" data-id="5-camera-da-letto">
-        <li class="text">Camera da letto</li>
+        <img class="sceneThumb" src="img/scene-thumbs/5-camera-da-letto.jpg" alt="Camera da letto">
+        <span class="text">Camera da letto</span>
       </a>
     
       <a href="javascript:void(0)" class="scene" data-id="6-camera-da-letto">
-        <li class="text">Camera da letto</li>
+        <img class="sceneThumb" src="img/scene-thumbs/6-camera-da-letto.jpg" alt="Camera da letto">
+        <span class="text">Camera da letto</span>
       </a>
     
       <a href="javascript:void(0)" class="scene" data-id="7-bagno">
-        <li class="text">Bagno</li>
+        <img class="sceneThumb" src="img/scene-thumbs/7-bagno.jpg" alt="Bagno">
+        <span class="text">Bagno</span>
       </a>
     
       <a href="javascript:void(0)" class="scene" data-id="8-corridoio">
-        <li class="text">Corridoio</li>
+        <img class="sceneThumb" src="img/scene-thumbs/8-corridoio.jpg" alt="Corridoio">
+        <span class="text">Corridoio</span>
       </a>
     
       <a href="javascript:void(0)" class="scene" data-id="9-corridoio">
-        <li class="text">Corridoio</li>
+        <img class="sceneThumb" src="img/scene-thumbs/9-corridoio.jpg" alt="Corridoio">
+        <span class="text">Corridoio</span>
       </a>
     
       <a href="javascript:void(0)" class="scene" data-id="10-cucina">
-        <li class="text">Cucina</li>
+        <img class="sceneThumb" src="img/scene-thumbs/10-cucina.jpg" alt="Cucina">
+        <span class="text">Cucina</span>
       </a>
     
       <a href="javascript:void(0)" class="scene" data-id="11-cucina">
-        <li class="text">Cucina</li>
+        <img class="sceneThumb" src="img/scene-thumbs/11-cucina.jpg" alt="Cucina">
+        <span class="text">Cucina</span>
       </a>
     
       <a href="javascript:void(0)" class="scene" data-id="12-cucina">
-        <li class="text">Cucina</li>
+        <img class="sceneThumb" src="img/scene-thumbs/12-cucina.jpg" alt="Cucina">
+        <span class="text">Cucina</span>
       </a>
     
   </ul>
 </div>
 
 <div id="titleBar">
-  <h1 class="sceneName"></h1>
+  <div class="tourAddress">
+    <img class="tourAddressIcon" src="img/location.svg" alt="">
+    <a class="sceneName" href="#" target="_blank" rel="noopener"></a>
+  </div>
+</div>
+
+<div id="agencyContact" class="agencyContact">
+  <div id="agencySocialPanel" class="agencySocialPanel" role="menu" aria-hidden="true" aria-label="Contatti agenzia"></div>
+  <button id="brandLogo" class="brandLogoButton" type="button" aria-expanded="false" aria-controls="agencySocialPanel" aria-label="Apri i contatti dell'agenzia">
+    <img class="brandLogoImage" src="" alt="">
+  </button>
 </div>
 
 <a href="javascript:void(0)" id="autorotateToggle">
@@ -88,6 +114,31 @@
   <img class="icon off" src="img/expand.png">
   <img class="icon on" src="img/collapse.png">
 </a>
+
+<a href="javascript:void(0)" id="minimapToggle" aria-label="Apri minimappa" title="Minimappa">
+  <img class="icon" src="img/minimap.svg" alt="">
+</a>
+
+<div id="minimapPanel" aria-hidden="true">
+  <div class="minimapBackdrop"></div>
+  <div class="minimapWindow" role="dialog" aria-modal="true" aria-label="Minimappa dell'appartamento">
+    <button type="button" id="minimapClose" aria-label="Chiudi minimappa">×</button>
+    <div class="minimapHeader">
+      <span class="minimapHeaderIcon"><img src="img/minimap.svg" alt=""></span>
+      <span>Minimappa</span>
+    </div>
+    <div class="minimapFloorSelector" role="tablist" aria-label="Selezione piano">
+      <button type="button" class="minimapFloorButton active" data-floor="0" role="tab" aria-selected="true">Piano 1</button>
+      <button type="button" class="minimapFloorButton" data-floor="1" role="tab" aria-selected="false">Piano 2</button>
+      <button type="button" class="minimapFloorButton" data-floor="2" role="tab" aria-selected="false">Piano 3</button>
+    </div>
+    <div class="minimapCanvas">
+      <div class="minimapImageWrap">
+        <img id="minimapImage" src="img/minimap-plan.png" alt="Planimetria del Piano 1">
+      </div>
+    </div>
+  </div>
+</div>
 
 <a href="javascript:void(0)" id="viewUp" class="viewControlButton viewControlButton-1">
   <img class="icon" src="img/up.png">
@@ -113,7 +164,8 @@
 <script src="vendor/marzipano.js" ></script>
 
 <script src="data.js"></script>
-<script src="index.js"></script>
+<script src="branding.js"></script>
+<script src="index.js?v=1.8.4A-final-polish"></script>
 
 </body>
 </html>
